@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Trivia de Motos</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: white;
+  text-align: center;
+}
+.container {
+  max-width: 600px;
+  margin: auto;
+}
+button {
+  margin: 10px;
+  padding: 10px;
+  width: 80%;
+  background: #ff3c00;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+button:hover {
+  background: #ff6a33;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>🏍️ Trivia de Motos</h1>
+  <h2 id="pregunta"></h2>
+  <div id="respuestas"></div>
+  <h3 id="resultado"></h3>
+</div>
+
+<script>
+const preguntas = [
+  {
+    pregunta: "¿Cual es el problema de los jovenes al usar motos?",
+    respuestas: ["Hacen derrape", "No usan equipo de proteccion", "Van mas de 5 personas", "Las modifican"],
+    correcta: 1
+  },
+  {
+    pregunta: "¿Es impi?",
+    respuestas: ["Cross", "Chopper", "Si", "Scooter"],
+    correcta: 2
+  },
+  {
+    pregunta: "¿Qué se usa para proteger la cabeza?",
+    respuestas: ["Guantes", "Casco", "Botas", "Chamarra"],
+    correcta: 1
+  },
+  {
+    pregunta: "¿Qué marca es japonesa?",
+    respuestas: ["Honda", "BMW", "Ducati", "Harley Davidson"],
+    correcta: 0
+  },
+  {
+    pregunta: "¿Qué hace el freno delantero?",
+    respuestas: ["Acelera", "Detiene la moto", "Cambia velocidad", "Nada"],
+    correcta: 1
+  },
+  {
+    pregunta: "¿Para qué sirve el clutch?",
+    respuestas: ["Frenar", "Cambiar velocidades", "Encender", "Iluminar"],
+    correcta: 1
+  },
+  {
+    pregunta: "¿Qué tipo de moto es para tierra?",
+    respuestas: ["Deportiva", "Cross", "Chopper", "Turismo"],
+    correcta: 1
+  },
+  {
+    pregunta: "¿Qué indica el velocímetro?",
+    respuestas: ["Gasolina", "Velocidad", "Temperatura", "Aceite"],
+    correcta: 1
+  },
+  {
+    pregunta: "¿Qué equipo protege el cuerpo?",
+    respuestas: ["Chamarra", "Casco", "Lentes", "Nada"],
+    correcta: 0
+  },
+  {
+    pregunta: "¿Qué es obligatorio al manejar moto?",
+    respuestas: ["Casco", "Música", "Luces apagadas", "Nada"],
+    correcta: 0
+  }
+];
+
+let indice = 0;
+let puntos = 0;
+
+function cargarPregunta() {
+  if (indice >= preguntas.length) {
+    document.getElementById("pregunta").innerText = "Juego terminado 🎉";
+    document.getElementById("respuestas").innerHTML = "";
+    document.getElementById("resultado").innerText = "Puntaje: " + puntos + "/10";
+    return;
+  }
+
+  let p = preguntas[indice];
+  document.getElementById("pregunta").innerText = p.pregunta;
+  let respuestasHTML = "";
+
+  p.respuestas.forEach((resp, i) => {
+    respuestasHTML += `<button onclick="verificar(${i})">${resp}</button>`;
+  });
+
+  document.getElementById("respuestas").innerHTML = respuestasHTML;
+}
+
+function verificar(respuesta) {
+  if (respuesta === preguntas[indice].correcta) {
+    puntos++;
+    alert("✅ Correcto");
+  } else {
+    alert("❌ Incorrecto");
+  }
+  indice++;
+  cargarPregunta();
+}
+
+cargarPregunta();
+</script>
+
+</body>
+</html>
